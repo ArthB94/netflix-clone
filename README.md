@@ -35,12 +35,12 @@ netflix-clone/
 ## **Prérequis**
 
 1. **Outils nécessaires :**
+
    - Docker
    - Kubernetes (Minikube ou Kind recommandé pour un environnement local)
    - Kubectl
    - Istio (installé sur le cluster Kubernetes)
    - Node.js (pour les tests locaux du front-end et des microservices)
-
 2. **Clonage du projet** :
 
    ```bash
@@ -77,16 +77,14 @@ cd ../frontend && docker build -t frontend .
 - Créez les variables d'environnement :
 
   ```bash
-  kubectl apply -f k8s/configmaps/configmap.yaml
+  kubectl apply -f k8s/configmaps
   ```
-
 - Déployez les bases de données PostgreSQL :
 
   ```bash
   kubectl apply -f k8s/deployments/auth-db-deployment.yaml
   kubectl apply -f k8s/deployments/films-db-deployment.yaml
   ```
-
 - Déployez les microservices et le front-end :
 
   ```bash
@@ -94,7 +92,6 @@ cd ../frontend && docker build -t frontend .
   kubectl apply -f k8s/deployments/films-deployment.yaml
   kubectl apply -f k8s/deployments/frontend-deployment.yaml
   ```
-
 - Configurez les services Kubernetes :
 
   ```bash
@@ -102,9 +99,8 @@ cd ../frontend && docker build -t frontend .
   kubectl apply -f k8s/services/films-service.yaml
   kubectl apply -f k8s/services/frontend-service.yaml
   ```
-
 - Ajoutez Istio pour le routage et le mesh API :
-  
+
   ```bash
   kubectl apply -f k8s/istio/gateway.yaml
   kubectl apply -f k8s/istio/virtual-services.yaml
@@ -117,7 +113,6 @@ cd ../frontend && docker build -t frontend .
   ```bash
   kubectl get svc -n istio-system
   ```
-  
 - Accédez à l'application via cette URL.
 
 ---

@@ -14,21 +14,9 @@ spec:
     spec:
       containers:
       - name: auth-service
-        image: auth-service
+        image: arthurb94/netflix-clone_auth-service:latest
         ports:
         - containerPort: 5000
         envFrom:
         - configMapRef:
             name: auth-config
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: auth-service
-spec:
-  selector:
-    app: auth-service
-  ports:
-    - protocol: TCP
-      port: 5000
-      targetPort: 5000

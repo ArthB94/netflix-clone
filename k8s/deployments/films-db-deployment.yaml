@@ -34,15 +34,3 @@ spec:
           hostPath:
             path: postgres/films-init.sql  # Chemin vers le fichier SQL sur l'hôte
             type: File
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: films-db
-spec:
-  selector:
-    app: films-db
-  ports:
-    - protocol: TCP
-      port: 5432
-      targetPort: 5432
