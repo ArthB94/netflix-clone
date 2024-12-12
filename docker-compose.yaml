@@ -1,0 +1,65 @@
+version: '3.9'
+
+services:
+  auth-service:
+    build:
+      context: ./auth-service
+    ports:
+      - "5000:5000"
+    environment:
+      - DATABASE_URL=postgres://user:password@auth-db:5432/auth
+      - JWT_SECRET=your_jwt_secret
+    depends_on:
+      - auth-db
+
+  films-service:
+    build:
+      context: ./films-service
+    ports:
+      - "5001:5001"
+    environment:
+      - DATABASE_URL=postgres://user:password@films-db:5432/films
+    depends_on:
+      - films-db
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - API_AUTH_URL=http://auth-service:5000
+      - API_FILMS_URL=http://films-service:5001
+    depends_on:
+      - auth-service
+      - films-service
+
+  auth-db:
+    image: postgres:15
+    container_name: auth-db
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=auth
+    volumes:
+      - auth-data:/var/lib/postgresql/data
+      - ./postgres/auth-init.sql:/docker-entrypoint-initdb.d/auth-init.sql
+
+  films-db:
+    image: postgres:15
+    container_name: films-db
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=films
+    volumes:
+      - films-data:/var/lib/postgresql/data
+      - ./postgres/films-init.sql:/docker-entrypoint-initdb.d/films-init.sql
+
+volumes:
+  auth-data:
+  films-data:
