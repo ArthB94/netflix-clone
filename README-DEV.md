@@ -1,4 +1,10 @@
-***Dev images***
+***Fast test:***
+start minikube:
+
+```bash
+minikube start
+```
+
 To be updates, the images must be build from the minicubs docker:
 
 * windows:
@@ -11,19 +17,6 @@ then build the images:
 
 ```bash
 docker compose build
-```
-
-and reload the deployments:
-
-```bash
-kubectl rollout restart deployment
-```
-
-***Fast test:***
-start minikube:
-
-```bash
-minikube start
 ```
 
 apply the configmaps:
@@ -62,5 +55,18 @@ to test the other services, we need to port-forward the services to our local ma
 
 ```bash
 kubectl port-forward service/auth-service 8080:5000
+```
+
+***Update deployment***
+re-build the images:
+
+```bash
+docker compose build
+```
+
+If you need to reload the deployment:
+
+```bash
+kubectl rollout restart deployment
 ```
 
