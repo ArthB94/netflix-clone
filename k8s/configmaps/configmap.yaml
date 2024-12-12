@@ -1,0 +1,30 @@
+# ConfigMaps for auth service/db
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: auth-config
+data:
+  DATABASE_URL: "postgres://user:password@auth-db:5432/auth"
+  POSTGRES_USER : "user"
+  POSTGRES_PASSWORD : "password"
+  POSTGRES_DB : "auth"
+
+# ConfigMaps for films service/db
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: films-config
+data:
+  DATABASE_URL: "postgres://user:password@films-db:5432/films"
+  POSTGRES_USER : "user"
+  POSTGRES_PASSWORD : "password"
+  POSTGRES_DB : "films"
+
+# ConfigMaps for frontend service
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frontend-config
+data:
+  API_AUTH_URL: "http://auth-service:5000"
+  API_FILMS_URL: "http://films-service:5001"

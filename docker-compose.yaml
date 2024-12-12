@@ -4,6 +4,7 @@ services:
   auth-service:
     build:
       context: ./auth-service
+      image: auth-service
     ports:
       - "5000:5000"
     environment:
@@ -15,6 +16,7 @@ services:
   films-service:
     build:
       context: ./films-service
+      image: films-service
     ports:
       - "5001:5001"
     environment:
@@ -25,6 +27,7 @@ services:
   frontend:
     build:
       context: ./frontend
+      image: frontend
     ports:
       - "3000:3000"
     environment:
@@ -38,7 +41,7 @@ services:
     image: postgres:15
     container_name: auth-db
     ports:
-      - "5432:5432"
+      - "5434:5432"
     environment:
       - POSTGRES_USER=user
       - POSTGRES_PASSWORD=password

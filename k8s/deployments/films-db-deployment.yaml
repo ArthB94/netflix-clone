@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: films-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: films-db
+  template:
+    metadata:
+      labels:
+        app: films-db
+    spec:
+      containers:
+      - name: films-db
+        image: postgres:15
+        ports:
+        - containerPort: 5432
+        envFrom:
+        - configMapRef:
+            name: films-config
+        volumeMounts:
+        - name: films-data
+          mountPath: /var/lib/postgresql/data
+        - name: films-init
+          mountPath: /docker-entrypoint-initdb.d
+          subPath: films-init.sql
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: films-db
+spec:
+  selector:
+    app: films-db
+  ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432

@@ -1,0 +1,34 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: films-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: films-service
+  template:
+    metadata:
+      labels:
+        app: films-service
+    spec:
+      containers:
+      - name: films-service
+        image: films-service
+        ports:
+        - containerPort: 5001
+        envForm:
+        - configMapRef:
+            name: films-config
+---
+apiVersion: v1 
+kind: Service
+metadata:
+  name: films-service
+spec:
+  selector:
+    app: films-service
+  ports:
+    - protocol: TCP
+      port: 5001
+      targetPort: 5001

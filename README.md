@@ -42,6 +42,7 @@ netflix-clone/
    - Node.js (pour les tests locaux du front-end et des microservices)
 
 2. **Clonage du projet** :
+
    ```bash
    git clone https://github.com/votre-repo/netflix-clone.git
    cd netflix-clone
@@ -52,15 +53,19 @@ netflix-clone/
 ## **Instructions de déploiement**
 
 ### **1. Configuration des environnements**
+
 - Assurez-vous d'avoir configuré les variables d'environnement pour chaque service dans un fichier `.env`.
 - Exemple pour `auth-service` :
+
   ```env
   DATABASE_URL=postgres://user:password@auth-db:5432/auth
   JWT_SECRET=your_jwt_secret
   ```
 
 ### **2. Construction des conteneurs Docker**
+
 Construisez les images Docker pour chaque service :
+
 ```bash
 cd auth-service && docker build -t auth-service .
 cd ../films-service && docker build -t films-service .
@@ -68,34 +73,51 @@ cd ../frontend && docker build -t frontend .
 ```
 
 ### **3. Déploiement Kubernetes**
-- Déployez les bases de données PostgreSQL :
+
+- Créez les variables d'environnement :
+
   ```bash
-  kubectl apply -f k8s/deployments/postgres-auth.yaml
-  kubectl apply -f k8s/deployments/postgres-films.yaml
+  kubectl apply -f k8s/configmaps/configmap.yaml
   ```
+
+- Déployez les bases de données PostgreSQL :
+
+  ```bash
+  kubectl apply -f k8s/deployments/auth-db-deployment.yaml
+  kubectl apply -f k8s/deployments/films-db-deployment.yaml
+  ```
+
 - Déployez les microservices et le front-end :
+
   ```bash
   kubectl apply -f k8s/deployments/auth-deployment.yaml
   kubectl apply -f k8s/deployments/films-deployment.yaml
   kubectl apply -f k8s/deployments/frontend-deployment.yaml
   ```
+
 - Configurez les services Kubernetes :
+
   ```bash
   kubectl apply -f k8s/services/auth-service.yaml
   kubectl apply -f k8s/services/films-service.yaml
   kubectl apply -f k8s/services/frontend-service.yaml
   ```
+
 - Ajoutez Istio pour le routage et le mesh API :
+  
   ```bash
   kubectl apply -f k8s/istio/gateway.yaml
   kubectl apply -f k8s/istio/virtual-services.yaml
   ```
 
 ### **4. Accès à l'application**
+
 - Une fois le déploiement terminé, obtenez l'URL publique :
+
   ```bash
   kubectl get svc -n istio-system
   ```
+  
 - Accédez à l'application via cette URL.
 
 ---
@@ -103,13 +125,17 @@ cd ../frontend && docker build -t frontend .
 ## **Tests locaux**
 
 ### **1. Démarrage avec Docker Compose**
+
 Pour tester rapidement les microservices et le front-end localement :
+
 ```bash
 docker-compose up
 ```
+
 Accédez ensuite à l'application via `http://localhost:3000`.
 
 ### **2. Tests des API**
+
 Utilisez Postman ou un autre outil pour tester les endpoints des microservices.
 
 ---
@@ -127,10 +153,8 @@ Utilisez Postman ou un autre outil pour tester les endpoints des microservices.
 ---
 
 ## **Auteurs**
+
 - **Arthur BILLEBAUT** - Étudiant à EFREI Paris
 - **Hugo Panel** - Étudiant à EFREI Paris
 
 ---
-
-
-

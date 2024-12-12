@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth-db
+  template:
+    metadata:
+      labels:
+        app: auth-db
+    spec:
+      containers:
+      - name: auth-db
+        image: postgres:15
+        ports:
+        - containerPort: 5432
+        envFrom:
+        - configMapRef:
+            name: auth-config
+        volumeMounts:
+        - name: auth-data
+          mountPath: /var/lib/postgresql/data
+        - name: auth-init
+          mountPath: /docker-entrypoint-initdb.d
+          subPath: auth-init.sql
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-db
+spec:
+  selector:
+    app: auth-db
+  ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432
