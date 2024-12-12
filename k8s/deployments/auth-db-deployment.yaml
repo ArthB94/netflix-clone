@@ -13,28 +13,25 @@ spec:
         app: auth-db
     spec:
       containers:
-      - name: auth-db
-        image: postgres:15
-        ports:
-        - containerPort: 5432
-        envFrom:
-        - configMapRef:
-            name: auth-config
-        volumeMounts:
+        - name: auth-db
+          image: postgres:15
+          ports:
+            - containerPort: 5432
+          envFrom:
+            - configMapRef:
+                name: auth-config
+          volumeMounts:
+            - name: auth-data
+              mountPath: /var/lib/postgresql/data  # Montez le PVC ici
+            - name: auth-init
+              mountPath: /docker-entrypoint-initdb.d
+              subPath: auth-init.sql
+      volumes:
         - name: auth-data
-          mountPath: /var/lib/postgresql/data
+          persistentVolumeClaim:
+            claimName: auth-db-pvc
         - name: auth-init
-          mountPath: /docker-entrypoint-initdb.d
-          subPath: auth-init.sql
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: auth-db
-spec:
-  selector:
-    app: auth-db
-  ports:
-    - protocol: TCP
-      port: 5432
-      targetPort: 5432
+          hostPath:
+            path: postgres/auth-init.sql  # Chemin vers le fichier SQL sur l'hôte
+            type: File
+

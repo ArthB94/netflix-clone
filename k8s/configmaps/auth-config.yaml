@@ -1,0 +1,10 @@
+# ConfigMaps for auth service/db
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: auth-config
+data:
+  DATABASE_URL: "postgres://user:password@auth-db:5432/auth"
+  POSTGRES_USER : "user"
+  POSTGRES_PASSWORD : "password"
+  POSTGRES_DB : "auth"

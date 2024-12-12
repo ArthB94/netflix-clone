@@ -17,7 +17,7 @@ spec:
         image: your-frontend-image
         ports:
         - containerPort: 3000
-        envForm:
+        envFrom:
         - configMapRef:
             name: frontend-config
 ---

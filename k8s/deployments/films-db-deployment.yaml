@@ -25,16 +25,13 @@ spec:
           mountPath: /var/lib/postgresql/data
         - name: films-init
           mountPath: /docker-entrypoint-initdb.d
-          subPath: films-init.sql
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: films-db
-spec:
-  selector:
-    app: films-db
-  ports:
-    - protocol: TCP
-      port: 5432
-      targetPort: 5432
+          subPath: postgres/films-init.sql
+      volumes:
+        - name: films-data
+          persistentVolumeClaim:
+            claimName: films-db-pvc
+        - name: films-init
+          hostPath:
+            path: postgres/films-init.sql  # Chemin vers le fichier SQL sur l'hôte
+            type: File
+
