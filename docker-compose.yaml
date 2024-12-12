@@ -4,19 +4,18 @@ services:
   auth-service:
     build:
       context: ./auth-service
-      image: auth-service
+    image: auth-service
     ports:
       - "5000:5000"
     environment:
       - DATABASE_URL=postgres://user:password@auth-db:5432/auth
-      - JWT_SECRET=your_jwt_secret
     depends_on:
       - auth-db
 
   films-service:
     build:
       context: ./films-service
-      image: films-service
+    image: films-service
     ports:
       - "5001:5001"
     environment:
@@ -27,7 +26,7 @@ services:
   frontend:
     build:
       context: ./frontend
-      image: frontend
+    image: frontend
     ports:
       - "3000:3000"
     environment:
