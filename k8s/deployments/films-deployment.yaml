@@ -20,3 +20,15 @@ spec:
         envFrom:
         - configMapRef:
             name: films-config
+---
+apiVersion: v1 
+kind: Service
+metadata:
+  name: films-service
+spec:
+  selector:
+    app: films-service
+  ports:
+    - protocol: TCP
+      port: 5001
+      targetPort: 5001
