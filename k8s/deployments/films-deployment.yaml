@@ -14,9 +14,11 @@ spec:
     spec:
       containers:
       - name: films-service
-        image: arthurb94/netflix-clone_films-service:latest
+        image: films-service
+        imagePullPolicy: Never
         ports:
         - containerPort: 5001
         envFrom:
         - configMapRef:
             name: films-config
+

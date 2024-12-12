@@ -14,9 +14,10 @@ spec:
     spec:
       containers:
       - name: auth-service
-        image: arthurb94/netflix-clone_auth-service:latest
+        image: auth-service 
+        imagePullPolicy: Never
         ports:
         - containerPort: 5000
         envFrom:
         - configMapRef:
-            name: auth-config
+            name: auth-config 
