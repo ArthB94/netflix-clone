@@ -25,13 +25,12 @@ spec:
               mountPath: /var/lib/postgresql/data  # Montez le PVC ici
             - name: auth-init
               mountPath: /docker-entrypoint-initdb.d
-              subPath: auth-init.sql
       volumes:
         - name: auth-data
           persistentVolumeClaim:
             claimName: auth-db-pvc
         - name: auth-init
-          hostPath:
-            path: postgres/auth-init.sql  # Chemin vers le fichier SQL sur l'hôte
-            type: File
+          configMap:
+            name: auth-init-config
+
 
