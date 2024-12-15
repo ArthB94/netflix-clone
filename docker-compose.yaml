@@ -37,7 +37,7 @@ services:
       - films-service
 
   auth-db:
-    image: postgres:15
+    image: postgres:17
     container_name: auth-db
     ports:
       - "5434:5432"
@@ -50,7 +50,7 @@ services:
       - ./postgres/auth-init.sql:/docker-entrypoint-initdb.d/auth-init.sql
 
   films-db:
-    image: postgres:15
+    image: postgres:17
     container_name: films-db
     ports:
       - "5433:5432"
