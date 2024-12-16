@@ -11,7 +11,7 @@ const getToken = () => {
   return false //localStorage.getItem("token");
 };
 
-export const apiFetch = async (endpoint: string, options: ApiFetchOptions = {}): Promise<any | null> => {
+export const apiFetch = async (endpoint: string, options: ApiFetchOptions = {}): Promise<Response | null> => {
   const token = getToken();
 
   const headers: Record<string, string> = {
