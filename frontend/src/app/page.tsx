@@ -24,7 +24,7 @@ export default function Home() {
 
   return (
 
-    <main className=" max-w-min flex flex-col gap-8 row-start-2 items-center sm:items-start w-full">
+    <main className="max-w-min flex flex-col gap-8 row-start-2 items-center sm:items-start w-full">
       {/* Hero Section */}
       <div className="w-full bg-cover bg-center h-80 sm:h-96 text-white flex flex-col justify-end p-8"
         style={{ backgroundImage: 'url(\'https://via.placeholder.com/1920x1080\')' }}>

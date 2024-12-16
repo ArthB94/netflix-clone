@@ -29,7 +29,7 @@ export default function Login() {
       </div>
 
       {/* Login Form Section */}
-      <section className="w-full max-w-md bg-white rounded-lg p-8 shadow-md">
+      <section className="w-full max-w-md bg-white rounded-lg p-8 shadow-md text-gray-500">
         <h3 className="text-2xl font-bold mb-4 text-center">Login</h3>
 
         {error && <p className="text-red-600 text-center mb-4">{error}</p>}
