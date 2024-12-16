@@ -1,34 +1,34 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: films-db
+  name: movies-db
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: films-db
+      app: movies-db
   template:
     metadata:
       labels:
-        app: films-db
+        app: movies-db
     spec:
       containers:
-      - name: films-db
+      - name: movies-db
         image: postgres:17
         ports:
         - containerPort: 5432
         envFrom:
         - configMapRef:
-            name: films-config
+            name: movies-config
         volumeMounts:
-        - name: films-data
+        - name: movies-data
           mountPath: /var/lib/postgresql/data
-        - name: films-init
+        - name: movies-init
           mountPath: /docker-entrypoint-initdb.d
       volumes:
-        - name: films-data
+        - name: movies-data
           persistentVolumeClaim:
-            claimName: films-db-pvc
-        - name: films-init
+            claimName: movies-db-pvc
+        - name: movies-init
           configMap:
-            name: films-init-config
+            name: movies-init-config

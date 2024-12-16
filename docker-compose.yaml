@@ -12,16 +12,16 @@ services:
     depends_on:
       - auth-db
 
-  films-service:
+  movies-service:
     build:
-      context: ./films-service
-    image: films-service
+      context: ./movies-service
+    image: movies-service
     ports:
       - "5001:5001"
     environment:
-      - DATABASE_URL=postgres://user:password@films-db:5432/films
+      - DATABASE_URL=postgres://user:password@movies-db:5432/movies
     depends_on:
-      - films-db
+      - movies-db
 
   frontend:
     build:
@@ -31,10 +31,10 @@ services:
       - "3000:3000"
     environment:
       - API_AUTH_URL=http://auth-service:5000
-      - API_FILMS_URL=http://films-service:5001
+      - API_FILMS_URL=http://movies-service:5001
     depends_on:
       - auth-service
-      - films-service
+      - movies-service
 
   auth-db:
     image: postgres:17
@@ -49,19 +49,19 @@ services:
       - auth-data:/var/lib/postgresql/data
       - ./postgres/auth-init.sql:/docker-entrypoint-initdb.d/auth-init.sql
 
-  films-db:
+  movies-db:
     image: postgres:17
-    container_name: films-db
+    container_name: movies-db
     ports:
       - "5433:5432"
     environment:
       - POSTGRES_USER=user
       - POSTGRES_PASSWORD=password
-      - POSTGRES_DB=films
+      - POSTGRES_DB=movies
     volumes:
-      - films-data:/var/lib/postgresql/data
-      - ./postgres/films-init.sql:/docker-entrypoint-initdb.d/films-init.sql
+      - movies-data:/var/lib/postgresql/data
+      - ./postgres/movies-init.sql:/docker-entrypoint-initdb.d/movies-init.sql
 
 volumes:
   auth-data:
-  films-data:
+  movies-data:

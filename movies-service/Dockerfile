@@ -1,4 +1,4 @@
-# films-service/Dockerfile
+# movies-service/Dockerfile
 FROM node:20
 
 WORKDIR /app

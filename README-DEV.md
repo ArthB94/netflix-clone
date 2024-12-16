@@ -27,7 +27,7 @@ kubectl apply -f k8s/configmaps
 create configmaps for sql files:
 
 ```bash
-kubectl create configmap films-init-config --from-file=postgres/films-init.sql
+kubectl create configmap movies-init-config --from-file=postgres/movies-init.sql
 kubectl create configmap auth-init-config --from-file=postgres/auth-init.sql
 ```
 

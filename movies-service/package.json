@@ -1,7 +1,7 @@
 {
-  "name": "films_service",
+  "name": "movies_service",
   "version": "1.0.0",
-  "description": "films service for netflix clone",
+  "description": "movies service for netflix clone",
   "main": "index.js",
   "type": "module",
   "scripts": {

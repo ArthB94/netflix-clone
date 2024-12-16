@@ -1,6 +1,6 @@
 # Netflix Clone Simulation
 
-Ce projet est une simulation d'un clone de Netflix. Il est conçu pour apprendre et pratiquer les concepts de microservices, de conteneurisation, et d'orchestration à l'aide de Kubernetes, Istio et NGINX. Le projet inclut deux microservices (auth-service et films-service), chacun avec sa propre base de données PostgreSQL, ainsi qu'une interface frontale développée avec Next.js.
+Ce projet est une simulation d'un clone de Netflix. Il est conçu pour apprendre et pratiquer les concepts de microservices, de conteneurisation, et d'orchestration à l'aide de Kubernetes, Istio et NGINX. Le projet inclut deux microservices (auth-service et movies-service), chacun avec sa propre base de données PostgreSQL, ainsi qu'une interface frontale développée avec Next.js.
 
 ---
 
@@ -8,7 +8,7 @@ Ce projet est une simulation d'un clone de Netflix. Il est conçu pour apprendre
 
 - **Microservices** :
   - `auth-service` : Gère l'authentification des utilisateurs.
-  - `films-service` : Gère les informations sur les films.
+  - `movies-service` : Gère les informations sur les movies.
 - **Frontend** : Une interface utilisateur Next.js qui consomme les API des microservices.
 - **API Mesh** : Intégration d'Istio pour gérer le routage des requêtes et sécuriser les communications entre les services.
 - **Kubernetes** : Orchestration des conteneurs pour chaque composant.
@@ -20,7 +20,7 @@ Ce projet est une simulation d'un clone de Netflix. Il est conçu pour apprendre
 ```plaintext
 netflix-clone/
 ├── auth-service/          # Microservice pour l'authentification
-├── films-service/         # Microservice pour les films
+├── movies-service/         # Microservice pour les movies
 ├── frontend/              # Application Next.js
 ├── k8s/                   # Configurations Kubernetes
 │   ├── deployments/       # Fichiers de déploiement pour les services
@@ -68,7 +68,7 @@ Construisez les images Docker pour chaque service :
 
 ```bash
 cd auth-service && docker build -t auth-service .
-cd ../films-service && docker build -t films-service .
+cd ../movies-service && docker build -t movies-service .
 cd ../frontend && docker build -t frontend .
 ```
 
@@ -83,20 +83,20 @@ cd ../frontend && docker build -t frontend .
 
   ```bash
   kubectl apply -f k8s/deployments/auth-db-deployment.yaml
-  kubectl apply -f k8s/deployments/films-db-deployment.yaml
+  kubectl apply -f k8s/deployments/movies-db-deployment.yaml
   ```
 - Déployez les microservices et le front-end :
 
   ```bash
   kubectl apply -f k8s/deployments/auth-deployment.yaml
-  kubectl apply -f k8s/deployments/films-deployment.yaml
+  kubectl apply -f k8s/deployments/movies-deployment.yaml
   kubectl apply -f k8s/deployments/frontend-deployment.yaml
   ```
 - Configurez les services Kubernetes :
 
   ```bash
   kubectl apply -f k8s/services/auth-service.yaml
-  kubectl apply -f k8s/services/films-service.yaml
+  kubectl apply -f k8s/services/movies-service.yaml
   kubectl apply -f k8s/services/frontend-service.yaml
   ```
 - Ajoutez Istio pour le routage et le mesh API :

@@ -1,10 +1,10 @@
-# ConfigMaps for films service/db
+# ConfigMaps for movies service/db
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: films-config
+  name: movies-config
 data:
-  DATABASE_URL: "postgres://user:password@films-db:5432/films"
+  DATABASE_URL: "postgres://user:password@movies-db:5432/movies"
   POSTGRES_USER : "user"
   POSTGRES_PASSWORD : "password"
-  POSTGRES_DB : "films"
+  POSTGRES_DB : "movies"
