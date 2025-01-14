@@ -27,6 +27,7 @@ export default function MePage() {
         }
       } catch (error) {
         setError('Failed to load user data.');
+        router.push('/login'); // Redirige si une erreur se produit
         console.error(error);
       } finally {
         setLoading(false);
