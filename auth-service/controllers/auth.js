@@ -1,4 +1,5 @@
 import { createUser, getUserById, getUserByEmail } from "../database/queries/auth.js";
+import { generateAccessToken } from "../middleware/authenticateToken.js";
 import bcryptjs from 'bcryptjs';
 
 const { hash, compare } = bcryptjs;
@@ -43,7 +44,28 @@ const login = async (req, res) => {
     if (!isPasswordValid) {
       return res.status(401).json({ ok:false, errorMessage: 'Invalid password' });
     }
-    res.status(200).json({ ok:true, user });
+    const { password:_ , ...userWithoutPassword } = user;
+    const token = generateAccessToken(userWithoutPassword);
+    res.status(200).json({ ok:true, token: token, user: userWithoutPassword});
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ ok:false, errorMessage: 'Internal server error', error });
+  }
+}
+
+const getMyInfo = async (req, res) => {
+  console.log('getMyInfo');
+  const userId = req.user.id;
+  console.log('userId:', userId);
+  try {
+    const user = await getUserById(userId);
+    if (!user) {
+      console.log('User not found:', userId);
+      return res.status(404).json({ ok:false, errorMessage: 'User not found', userId });
+    }
+    const { password: _, ...userWithoutPassword } = user;
+    console.log('User found:', userWithoutPassword);
+    res.status(200).json({ ok:true, user: userWithoutPassword});
   } catch (error) {
     console.log(error);
     res.status(500).json({ ok:false, errorMessage: 'Internal server error', error });
@@ -52,6 +74,7 @@ const login = async (req, res) => {
 
 export {
   register,
-  login
+  login,
+  getMyInfo
 };
 

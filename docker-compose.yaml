@@ -30,7 +30,7 @@ services:
       context: ./frontend
     image: frontend
     ports:
-      - "3000:3000"
+      - "3001:3000"
     environment:
       - API_AUTH_URL=http://auth-service:5000
       - API_FILMS_URL=http://movies-service:5001
