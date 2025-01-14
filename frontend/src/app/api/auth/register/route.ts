@@ -1,6 +1,6 @@
-import { NextResponse } from 'next/server';
+import { NextResponse, NextRequest } from 'next/server';
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   const { email, password, username } = await req.json();
 
   const res = await fetch(`${process.env.API_AUTH_URL || 'http://localhost:3001'}/auth/register`, {

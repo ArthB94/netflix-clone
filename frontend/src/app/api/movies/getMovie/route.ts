@@ -1,9 +1,8 @@
 // get movie by id
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
-export async function GET(req: Request) {
-  const { searchParams } = new URL(req.url);
-  const id = searchParams.get('id');
+export async function GET(req: NextRequest) {
+  const id = req.nextUrl.searchParams.get('id');
   const res = await fetch(`${process.env.API_MOVIES_URL || 'http://localhost:3001'}/movies/getMovie/${id}`, {
     method: 'GET',
     headers: { 'Content-Type': 'application/json' },

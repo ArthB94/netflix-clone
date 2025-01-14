@@ -1,6 +1,6 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
-export async function GET(req: Request) {
+export async function GET(req: NextRequest) {
   console.log(req);
   const res = await fetch(`${process.env.API_MOVIES_URL || 'http://localhost:3001'}/movies/getAll`, {
     method: 'GET',
