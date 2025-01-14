@@ -2,7 +2,7 @@
 start minikube:
 
 ```bash
-minikube start
+minikube start -p netflix-clone
 ```
 
 To be updates, the images must be build from the minicubs docker:
@@ -10,7 +10,7 @@ To be updates, the images must be build from the minicubs docker:
 * windows:
 
   ```bash
-  & minikube -p minikube docker-env --shell powershell | Invoke-Expression
+  & minikube -p netflix-clone docker-env --shell powershell | Invoke-Expression
   ```
 
 then build the images:
@@ -24,11 +24,12 @@ apply the configmaps:
 ```bash
 kubectl apply -f k8s/configmaps
 ```
+
 create configmaps for sql files:
 
 ```bash
-kubectl create configmap movies-init-config --from-file=postgres/movies-init.sql
-kubectl create configmap auth-init-config --from-file=postgres/auth-init.sql
+kubectl create configmap movies-sql-config --from-file=postgres/movies-init.sql
+kubectl create configmap auth-sql-config --from-file=postgres/auth-init.sql
 ```
 
 apply the deployments:
@@ -54,7 +55,7 @@ wee need to see _Running_ appears in the STATUS column for each pod.
 to access the frontend, we need to get the external IP of the frontend service:
 
 ```bash
-minikube service frontend-external 
+minikube -p netflix-clone service frontend-external 
 ```
 
 to test the other services, we need to port-forward the services to our local machine:
@@ -75,4 +76,3 @@ If you need to reload the deployment:
 ```bash
 kubectl rollout restart deployment
 ```
-

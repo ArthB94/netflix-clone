@@ -1,8 +1,9 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: auth-db
 spec:
+  serviceName: "auth-db-service"
   replicas: 1
   selector:
     matchLabels:
@@ -22,15 +23,18 @@ spec:
                 name: auth-config
           volumeMounts:
             - name: auth-data
-              mountPath: /var/lib/postgresql/data  # Montez le PVC ici
+              mountPath: /var/lib/postgresql/data
             - name: auth-init
               mountPath: /docker-entrypoint-initdb.d
       volumes:
-        - name: auth-data
-          persistentVolumeClaim:
-            claimName: auth-db-pvc
         - name: auth-init
           configMap:
-            name: auth-init-config
-
-
+            name: auth-sql-config
+  volumeClaimTemplates:
+    - metadata:
+        name: auth-data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 1Gi

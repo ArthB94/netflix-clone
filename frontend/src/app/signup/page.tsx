@@ -1,28 +1,33 @@
 "use client";
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { login } from '@/api/user';
+import { signup } from '@/api/user';
 
-export default function Login() {
+export default function Signup() {
   const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    try {
-      const res = await login(email, password);
+    
+    if (email && username && password.length >= 6) {
+      try {
+        const res = await signup(email, username, password);
+        console.log(res);
+        if (res && res.ok) {
+          router.push('/'); // Redirige vers la page d'accueil après l'inscription réussie
+        }
 
-      if (res && !res.error) {
-        router.push('/');
-      } else {
-        setError(res.error || 'Invalid email or password');
+      } catch (error) {
+        setError('An error occurred. Please try again.');
+        console.error(error);
       }
-    } catch (error) {
-      setError('An error occurred. Please try again. ');
-      console.error(error);
+    } else {
+      setError('Please fill all fields correctly. Password must be at least 6 characters.');
     }
   };
 
@@ -31,17 +36,17 @@ export default function Login() {
       {/* Hero Section */}
       <div className="w-full bg-cover bg-center h-80 sm:h-96 text-white flex flex-col justify-end p-8" 
            style={{ backgroundImage: 'url(\'https://via.placeholder.com/1920x1080\')' }}>
-        <h2 className="text-4xl font-bold mb-2">Welcome Back to Teflix</h2>
-        <p className="text-lg">Sign in to continue watching your favorite movies and series.</p>
+        <h2 className="text-4xl font-bold mb-2">Join Teflix</h2>
+        <p className="text-lg">Sign up to start your journey with us!</p>
       </div>
 
-      {/* Login Form Section */}
+      {/* Signup Form Section */}
       <section className="w-full max-w-md bg-white rounded-lg p-8 shadow-md text-gray-500">
-        <h3 className="text-2xl font-bold mb-4 text-center">Login</h3>
+        <h3 className="text-2xl font-bold mb-4 text-center">Sign Up</h3>
 
         {error && <p className="text-red-600 text-center mb-4">{error}</p>}
 
-        <form onSubmit={handleLogin} className="space-y-4">
+        <form onSubmit={handleSignup} className="space-y-4">
           <div>
             <label htmlFor="email" className="block text-lg font-semibold">Email</label>
             <input
@@ -49,6 +54,18 @@ export default function Login() {
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              required
+              className="w-full px-4 py-2 mt-2 border rounded-md border-gray-300 focus:ring-2 focus:ring-red-600 focus:outline-none"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="username" className="block text-lg font-semibold">Username</label>
+            <input
+              type="text"
+              id="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               required
               className="w-full px-4 py-2 mt-2 border rounded-md border-gray-300 focus:ring-2 focus:ring-red-600 focus:outline-none"
             />
@@ -70,18 +87,18 @@ export default function Login() {
             type="submit"
             className="w-full mt-4 px-6 py-2 bg-red-600 hover:bg-red-700 rounded text-white font-semibold"
           >
-            Log In
+            Sign Up
           </button>
         </form>
 
         <div className="mt-4 text-center">
           <p className="text-sm">
-            Don&#39;t have an account? 
+            Already have an account? 
             <button
-              onClick={() => router.push('/signup')}
+              onClick={() => router.push('/login')}
               className="text-red-600 hover:underline"
             >
-              Sign Up
+              Log In
             </button>
           </p>
         </div>

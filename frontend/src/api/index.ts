@@ -1,6 +1,3 @@
-
-const host = `http://localhost:3001`;
-
 type ApiFetchOptions = {
   method?: string; 
   headers?: Record<string, string>;
@@ -11,7 +8,7 @@ const getToken = () => {
   return false //localStorage.getItem("token");
 };
 
-export const apiFetch = async (endpoint: string, options: ApiFetchOptions = {}): Promise<Response | null> => {
+export const apiFetch = async (host:string, endpoint: string, options: ApiFetchOptions = {}): Promise<Response | null> => {
   const token = getToken();
 
   const headers: Record<string, string> = {

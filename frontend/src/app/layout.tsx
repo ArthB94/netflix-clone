@@ -38,6 +38,7 @@ export default function RootLayout({
           <Link href="/movies" className="hover:underline">Movies</Link>
           <Link href="/series" className="hover:underline">Series</Link>
           <Link href="/my-list" className="hover:underline">My List</Link>
+          <Link href="/login" className="hover:underline">Login</Link>
         </nav>
       </header>
           {children}

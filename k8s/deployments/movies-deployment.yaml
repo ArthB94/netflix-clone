@@ -17,7 +17,7 @@ spec:
         image: movies-service
         imagePullPolicy: Never
         ports:
-        - containerPort: 5001
+        - containerPort: 5000
         envFrom:
         - configMapRef:
             name: movies-config

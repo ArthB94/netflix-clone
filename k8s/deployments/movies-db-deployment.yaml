@@ -1,8 +1,9 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: movies-db
 spec:
+  serviceName: movies-db-service
   replicas: 1
   selector:
     matchLabels:
@@ -26,9 +27,14 @@ spec:
         - name: movies-init
           mountPath: /docker-entrypoint-initdb.d
       volumes:
-        - name: movies-data
-          persistentVolumeClaim:
-            claimName: movies-db-pvc
         - name: movies-init
           configMap:
-            name: movies-init-config
+            name: movies-sql-config
+  volumeClaimTemplates:
+    - metadata:
+        name: movies-data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 1Gi
