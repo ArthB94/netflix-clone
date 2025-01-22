@@ -10,9 +10,6 @@ const getToken = () => {
   return false; //localStorage.getItem("token");
 };
 
-// const host = process.env.REACT_APP_API_HOST;
-// const host = "http://movies-service:5000";
-
 const apiFetch = async (
   host: string,
   endpoint: string,
