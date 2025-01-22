@@ -1,41 +1,43 @@
 "use client";
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { signup } from '@/api/user';
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { signup } from "@/api/user";
 
 export default function Signup() {
-  const [email, setEmail] = useState('');
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    
     if (email && username && password.length >= 6) {
       try {
         const res = await signup(email, username, password);
         console.log(res);
         if (res && res.ok) {
-          router.push('/'); // Redirige vers la page d'accueil après l'inscription réussie
+          router.push("/"); // Redirige vers la page d'accueil après l'inscription réussie
         }
-
       } catch (error) {
-        setError('An error occurred. Please try again.');
+        setError("An error occurred. Please try again.");
         console.error(error);
       }
     } else {
-      setError('Please fill all fields correctly. Password must be at least 6 characters.');
+      setError(
+        "Please fill all fields correctly. Password must be at least 6 characters."
+      );
     }
   };
 
   return (
     <main className="flex flex-col gap-8 items-center w-full p-4 sm:p-8">
       {/* Hero Section */}
-      <div className="w-full bg-cover bg-center h-80 sm:h-96 text-white flex flex-col justify-end p-8" 
-           style={{ backgroundImage: 'url(\'https://via.placeholder.com/1920x1080\')' }}>
+      <div
+        className="w-full bg-cover bg-center h-80 sm:h-96 text-white flex flex-col justify-end p-8"
+        style={{ backgroundImage: "url('https://picsum.photos/1920/1080')" }}
+      >
         <h2 className="text-4xl font-bold mb-2">Join Teflix</h2>
         <p className="text-lg">Sign up to start your journey with us!</p>
       </div>
@@ -48,7 +50,9 @@ export default function Signup() {
 
         <form onSubmit={handleSignup} className="space-y-4">
           <div>
-            <label htmlFor="email" className="block text-lg font-semibold">Email</label>
+            <label htmlFor="email" className="block text-lg font-semibold">
+              Email
+            </label>
             <input
               type="email"
               id="email"
@@ -60,7 +64,9 @@ export default function Signup() {
           </div>
 
           <div>
-            <label htmlFor="username" className="block text-lg font-semibold">Username</label>
+            <label htmlFor="username" className="block text-lg font-semibold">
+              Username
+            </label>
             <input
               type="text"
               id="username"
@@ -72,7 +78,9 @@ export default function Signup() {
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-lg font-semibold">Password</label>
+            <label htmlFor="password" className="block text-lg font-semibold">
+              Password
+            </label>
             <input
               type="password"
               id="password"
@@ -93,9 +101,9 @@ export default function Signup() {
 
         <div className="mt-4 text-center">
           <p className="text-sm">
-            Already have an account? 
+            Already have an account?
             <button
-              onClick={() => router.push('/login')}
+              onClick={() => router.push("/login")}
               className="text-red-600 hover:underline"
             >
               Log In

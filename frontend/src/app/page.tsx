@@ -1,9 +1,9 @@
 "use client";
-import { getMovies } from '@/api/movies';
-import { Movie } from '@/types/movies';
-import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { getMovies } from "@/api/movies";
+import { Movie } from "@/types/movies";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 export default function Home() {
   const [movies, setMovies] = useState<Movie[]>([]);
 
@@ -23,13 +23,16 @@ export default function Home() {
   };
 
   return (
-
     <main className="max-w-min flex flex-col gap-8 row-start-2 items-center sm:items-start w-full">
       {/* Hero Section */}
-      <div className="w-full bg-cover bg-center h-80 sm:h-96 text-white flex flex-col justify-end p-8"
-        style={{ backgroundImage: 'url(\'https://via.placeholder.com/1920x1080\')' }}>
+      <div
+        className="w-full bg-cover bg-center h-80 sm:h-96 text-white flex flex-col justify-end p-8"
+        style={{ backgroundImage: "url('https://picsum.photos/1920/1080')" }}
+      >
         <h2 className="text-4xl font-bold mb-2">Welcome to Teflix</h2>
-        <p className="text-lg">Watch your favorite movies and series anytime, anywhere.</p>
+        <p className="text-lg">
+          Watch your favorite movies and series anytime, anywhere.
+        </p>
         <button className="mt-4 px-6 py-2 bg-red-600 hover:bg-red-700 rounded text-white font-semibold">
           Start Watching
         </button>
@@ -50,21 +53,21 @@ export default function Home() {
               >
                 <div className="bg-gray-300 h-40 sm:h-60 rounded overflow-hidden">
                   <Image
-                    src={item.imageUrl || 'https://via.placeholder.com/300x400'}
+                    src={item.imageUrl || "https://piscum.photos/300/400"}
                     alt={item.title}
                     width={300}
                     height={400}
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <div className="text-center text-lg font-semibold">{item.title}</div>
+                <div className="text-center text-lg font-semibold">
+                  {item.title}
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
-
     </main>
-
   );
 }

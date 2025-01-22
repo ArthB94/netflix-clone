@@ -1,7 +1,7 @@
-import { Movie } from '@/types/movies';
-import { redirect } from 'next/navigation';
-import Image from 'next/image';
-import { getMovie } from '@/api/movies';
+import { Movie } from "@/types/movies";
+import { redirect } from "next/navigation";
+import Image from "next/image";
+import { getMovie } from "@/api/movies";
 
 async function fetchMovie(id: number): Promise<Movie | undefined> {
   const res = await getMovie(id);
@@ -15,12 +15,12 @@ export default async function MovieDetail({
 }) {
   const { id } = await params; // Await params since it's a Promise
   if (!id) {
-    redirect('/login');
+    redirect("/login");
   }
 
   const movie = await fetchMovie(id);
   if (!movie) {
-    redirect('/movies');
+    redirect("/movies");
   }
 
   return (
@@ -28,7 +28,7 @@ export default async function MovieDetail({
       <div className="flex flex-col sm:flex-row gap-8">
         <div className="w-full sm:w-1/3">
           <Image
-            src={movie.imageUrl || 'https://via.placeholder.com/300x400'}
+            src={movie.imageUrl || "https://placehold.co/300x400"}
             alt={movie.title}
             className="w-full h-full object-cover rounded"
             width={300}

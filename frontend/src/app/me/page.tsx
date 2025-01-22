@@ -1,7 +1,7 @@
 "use client";
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { me, logout } from '@/api/user';
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { me, logout } from "@/api/user";
 
 interface User {
   email: string;
@@ -23,11 +23,11 @@ export default function MePage() {
           setUser(res.user);
           console.log(res.user);
         } else {
-          router.push('/login'); // Redirige si l'utilisateur n'est pas connecté
+          router.push("/login"); // Redirige si l'utilisateur n'est pas connecté
         }
       } catch (error) {
-        setError('Failed to load user data.');
-        router.push('/login'); // Redirige si une erreur se produit
+        setError("Failed to load user data.");
+        router.push("/login"); // Redirige si une erreur se produit
         console.error(error);
       } finally {
         setLoading(false);
@@ -40,9 +40,9 @@ export default function MePage() {
   const handleLogout = async () => {
     try {
       await logout();
-      router.push('/login'); // Redirige après déconnexion
+      router.push("/login"); // Redirige après déconnexion
     } catch (error) {
-      setError('Logout failed. Please try again.');
+      setError("Logout failed. Please try again.");
       console.error(error);
     }
   };
@@ -60,7 +60,7 @@ export default function MePage() {
       {/* Hero Section */}
       <div
         className="w-full bg-cover bg-center h-80 sm:h-96 text-white flex flex-col justify-end p-8"
-        style={{ backgroundImage: 'url(\'https://via.placeholder.com/1920x1080\')' }}
+        style={{ backgroundImage: "url('https://picsum.photos/1920/1080')" }}
       >
         <h2 className="text-4xl font-bold mb-2">Welcome Back!</h2>
         <p className="text-lg">Here are your account details.</p>
@@ -89,7 +89,9 @@ export default function MePage() {
             </div>
 
             <div>
-              <label className="block text-lg font-semibold">Member Since</label>
+              <label className="block text-lg font-semibold">
+                Member Since
+              </label>
               <p className="w-full px-4 py-2 mt-2 border rounded-md border-gray-300 bg-gray-100">
                 {new Date(user.created_at).toLocaleDateString()}
               </p>

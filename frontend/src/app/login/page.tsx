@@ -1,11 +1,11 @@
 "use client";
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { login } from '@/api/user';
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { login } from "@/api/user";
 
 export default function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
@@ -16,12 +16,12 @@ export default function Login() {
       const res = await login(email, password);
 
       if (res && !res.error) {
-        router.push('/');
+        router.push("/");
       } else {
-        setError(res.error || 'Invalid email or password');
+        setError(res.error || "Invalid email or password");
       }
     } catch (error) {
-      setError('An error occurred. Please try again. ');
+      setError("An error occurred. Please try again. ");
       console.error(error);
     }
   };
@@ -29,10 +29,14 @@ export default function Login() {
   return (
     <main className="flex flex-col gap-8 items-center w-full p-4 sm:p-8">
       {/* Hero Section */}
-      <div className="w-full bg-cover bg-center h-80 sm:h-96 text-white flex flex-col justify-end p-8" 
-           style={{ backgroundImage: 'url(\'https://via.placeholder.com/1920x1080\')' }}>
+      <div
+        className="w-full bg-cover bg-center h-80 sm:h-96 text-white flex flex-col justify-end p-8"
+        style={{ backgroundImage: "url('https://picsum.photos/1920/1080')" }}
+      >
         <h2 className="text-4xl font-bold mb-2">Welcome Back to Teflix</h2>
-        <p className="text-lg">Sign in to continue watching your favorite movies and series.</p>
+        <p className="text-lg">
+          Sign in to continue watching your favorite movies and series.
+        </p>
       </div>
 
       {/* Login Form Section */}
@@ -43,7 +47,9 @@ export default function Login() {
 
         <form onSubmit={handleLogin} className="space-y-4">
           <div>
-            <label htmlFor="email" className="block text-lg font-semibold">Email</label>
+            <label htmlFor="email" className="block text-lg font-semibold">
+              Email
+            </label>
             <input
               type="email"
               id="email"
@@ -55,7 +61,9 @@ export default function Login() {
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-lg font-semibold">Password</label>
+            <label htmlFor="password" className="block text-lg font-semibold">
+              Password
+            </label>
             <input
               type="password"
               id="password"
@@ -76,9 +84,9 @@ export default function Login() {
 
         <div className="mt-4 text-center">
           <p className="text-sm">
-            Don&#39;t have an account? 
+            Don&#39;t have an account?
             <button
-              onClick={() => router.push('/signup')}
+              onClick={() => router.push("/signup")}
               className="text-red-600 hover:underline"
             >
               Sign Up
