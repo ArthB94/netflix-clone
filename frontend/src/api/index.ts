@@ -1,19 +1,28 @@
+"use server";
+
 type ApiFetchOptions = {
-  method?: string; 
+  method?: string;
   headers?: Record<string, string>;
   body?: string;
 };
 
 const getToken = () => {
-  return false //localStorage.getItem("token");
+  return false; //localStorage.getItem("token");
 };
 
-export const apiFetch = async (host:string, endpoint: string, options: ApiFetchOptions = {}): Promise<Response | null> => {
+// const host = process.env.REACT_APP_API_HOST;
+// const host = "http://movies-service:5000";
+
+const apiFetch = async (
+  host: string,
+  endpoint: string,
+  options: ApiFetchOptions = {}
+) => {
   const token = getToken();
 
   const headers: Record<string, string> = {
     "Content-Type": "application/json",
-    ...(token && { "Authorization": `Bearer ${token}` }),
+    ...(token && { Authorization: `Bearer ${token}` }),
   };
 
   try {
@@ -27,13 +36,17 @@ export const apiFetch = async (host:string, endpoint: string, options: ApiFetchO
 
     if (!response.ok) {
       const errorMessage = await response.text();
-      console.error(`Request failed! Status: ${response.status}, Message: ${errorMessage}`);
+      console.error(
+        `Request failed! Status: ${response.status}, Message: ${errorMessage}`
+      );
       return null;
     }
 
     return await response.json();
   } catch (error) {
-    console.error('Fetch error:', error);
+    console.error("Fetch error:", error);
     return null;
   }
 };
+
+export default apiFetch;
