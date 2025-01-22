@@ -1,4 +1,4 @@
-***Fast test:***
+**Fast test:**
 start minikube:
 
 ```bash
@@ -7,7 +7,13 @@ minikube start -p netflix-clone
 
 To be updates, the images must be build from the minicubs docker:
 
-* windows:
+- macOS:
+
+```bash
+eval $(minikube -p netflix-clone docker-env)
+```
+
+- windows:
 
   ```bash
   & minikube -p netflix-clone docker-env --shell powershell | Invoke-Expression
@@ -55,7 +61,7 @@ wee need to see _Running_ appears in the STATUS column for each pod.
 to access the frontend, we need to get the external IP of the frontend service:
 
 ```bash
-minikube -p netflix-clone service frontend-external 
+minikube -p netflix-clone service frontend-external
 ```
 
 to test the other services, we need to port-forward the services to our local machine:
@@ -64,7 +70,7 @@ to test the other services, we need to port-forward the services to our local ma
 kubectl port-forward service/auth-service 8080:5000
 ```
 
-***Update deployment***
+**Update deployment**
 re-build the images:
 
 ```bash
