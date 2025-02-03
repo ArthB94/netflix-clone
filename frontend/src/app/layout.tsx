@@ -1,8 +1,11 @@
+// app/layout.tsx
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { app_name } from '@/config';
+import { app_name } from "@/config";
 import "./globals.css";
-import Link from "next/link";
+import ActiveLink from "../components/ActiveLink"; // toujours utile pour d'autres liens si nécessaire
+import { AuthProvider } from "../components/AuthContext";
+import Nav from "./Nav";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,24 +32,20 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-            <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      {/* Header */}
-      <header className="w-full flex justify-between items-center py-4 px-8 text-white">
-        <h1 className="text-3xl font-bold">{app_name}</h1>
-        <nav className="flex gap-4">
-          <Link href="/" className="hover:underline">Home</Link>
-          <Link href="/movies" className="hover:underline">Movies</Link>
-          <Link href="/series" className="hover:underline">Series</Link>
-          <Link href="/my-list" className="hover:underline">My List</Link>
-          <Link href="/login" className="hover:underline">Login</Link>
-        </nav>
-      </header>
-          {children}
-           {/* Footer */}
-      <footer className="w-full text-center text-sm text-gray-500 py-4">
-        <p>&copy; 2024 {app_name}. All rights reserved.</p>
-      </footer>
-    </div>
+        <AuthProvider>
+          <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+            {/* Header */}
+            <header className="w-full flex justify-between items-center py-4 px-8 text-white">
+              <h1 className="text-3xl font-bold">{app_name}</h1>
+              <Nav />
+            </header>
+            {children}
+            {/* Footer */}
+            <footer className="w-full text-center text-sm text-gray-500 py-4">
+              <p>&copy; 2024 {app_name}. All rights reserved.</p>
+            </footer>
+          </div>
+        </AuthProvider>
       </body>
     </html>
   );

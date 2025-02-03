@@ -19,7 +19,7 @@ export default function Home() {
   const router = useRouter();
 
   const handleMovieClick = (id: number) => {
-    router.push(`/movie/${id}`);
+    router.push(`/movies/${id}`);
   };
 
   return (

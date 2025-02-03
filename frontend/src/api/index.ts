@@ -1,13 +1,15 @@
 "use server";
-
+import { cookies } from "next/headers";
 type ApiFetchOptions = {
   method?: string;
   headers?: Record<string, string>;
   body?: string;
 };
 
-const getToken = () => {
-  return false; //localStorage.getItem("token");
+export const getToken = async () => {
+  const cookie = await cookies()
+  const token = cookie.get('auth_token')?.value;
+  return token ? cookie : null;
 };
 
 const apiFetch = async (

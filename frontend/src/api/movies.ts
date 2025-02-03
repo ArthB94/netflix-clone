@@ -12,7 +12,7 @@ export const getMovies = async (): Promise<Movie[]> => {
     throw new Error("Failed to fetch movies");
   }
   const movies: Movie[] = await res;
-  console.log("Movies:", movies);
+  //console.log("Movies:", movies);
   return movies;
 };
 

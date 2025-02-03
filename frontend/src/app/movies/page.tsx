@@ -20,7 +20,7 @@ export default function Movies() {
   }, []);
 
   const handleMovieClick = (id: number) => {
-    router.push(`/movie/${id}`);
+    router.push(`/movies/${id}`);
   };
 
   fetch("/api/movies", {

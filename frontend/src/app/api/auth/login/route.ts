@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {
   const { email, password } = await req.json();
-
+  console.log(email, password);
   const res = await fetch(`${process.env.API_AUTH_URL || 'http://localhost:3001'}/auth/login`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
 
   // On stocke le token dans un cookie sécurisé
   const response = NextResponse.json({ success: true });
-  response.cookies.set('token', data.token, {
+  response.cookies.set('auth_token', data.token, {
     httpOnly: true,
     secure: true,
     sameSite: 'strict',
