@@ -14,8 +14,9 @@ export default function UserInfo(props: { user: User }) {
 
   const handleLogout = async () => {
     try {
-      logout();
+      await logout();
       router.push("/login");
+      router.refresh();
     } catch (error) {
       setError("Logout failed. Please try again.");
       console.error(error);
