@@ -20,7 +20,7 @@ export default function LoginForm() {
     setError(null);
 
     try {
-      await login(email, password);
+      login(email, password);
       router.push("/");
     } catch (err: any) {
       setError(err.message);

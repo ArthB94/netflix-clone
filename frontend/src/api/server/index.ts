@@ -4,25 +4,36 @@ type ApiFetchOptions = {
   method?: string;
   headers?: Record<string, string>;
   body?: string;
+  tokenNeeded?: boolean;
 };
 
 export const getToken = async () => {
-  const cookie = await cookies()
-  const token = cookie.get('auth_token')?.value;
-  return token ? cookie : null;
+  const token = (await cookies()).get('auth_token')?.value;
+  return token || null;
 };
 
 const apiFetch = async (
   host: string,
   endpoint: string,
-  options: ApiFetchOptions = {}
+  options: ApiFetchOptions = {},
+  tokenNeeded: boolean = false
 ) => {
-  const token = getToken();
+  const token = await getToken();
+  if (!host) {
+    console.error("API host is not defined");
+    return null;
+  }
+
+  if (tokenNeeded && !token) {
+    console.log("Token is not defined");
+    return null;
+  };
 
   const headers: Record<string, string> = {
     "Content-Type": "application/json",
-    ...(token && { Authorization: `Bearer ${token}` }),
+    ...(token && { 'Authorization': `Bearer ${token}` }),
   };
+  console.log("Headers:", headers);
 
   try {
     const response = await fetch(`${host}${endpoint}`, {
@@ -35,7 +46,7 @@ const apiFetch = async (
 
     if (!response.ok) {
       const errorMessage = await response.text();
-      console.error(
+      console.log(
         `Request failed! Status: ${response.status}, Message: ${errorMessage}`
       );
       return null;
@@ -43,7 +54,7 @@ const apiFetch = async (
 
     return await response.json();
   } catch (error) {
-    console.error("Fetch error:", error);
+    console.log("Fetch error:", error);
     return null;
   }
 };

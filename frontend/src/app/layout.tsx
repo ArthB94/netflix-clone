@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { app_name } from "@/config";
 import "./globals.css";
-import ActiveLink from "../components/ActiveLink"; // toujours utile pour d'autres liens si nécessaire
 import { AuthProvider } from "../components/AuthContext";
 import Nav from "./Nav";
 

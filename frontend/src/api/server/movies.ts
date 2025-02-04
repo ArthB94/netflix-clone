@@ -1,6 +1,6 @@
 "use server";
 
-import apiFetch from ".";
+import apiFetch from "./";
 import { Movie } from "@/types/movies";
 const endpoint = "/movies";
 

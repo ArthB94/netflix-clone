@@ -1,7 +1,7 @@
 import { Movie } from "@/types/movies";
 import { redirect } from "next/navigation";
 import Image from "next/image";
-import { getMovie } from "@/api/movies";
+import { getMovie } from "@/api/server/movies";
 
 async function fetchMovie(id: number): Promise<Movie | undefined> {
   const res = await getMovie(id);

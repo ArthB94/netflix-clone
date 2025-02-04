@@ -21,11 +21,3 @@ export const fetchLogout = async () => {
   const res = await fetch('/api/auth/logout', { method: 'POST' });
   return res.json();
 };
-
-export const fetchMe = async (token: string) => {
-  const res = await fetch('/api/auth/me', {
-    headers: { Authorization: `Bearer ${token}` },
-  }
-  );
-  return res.json();
-}

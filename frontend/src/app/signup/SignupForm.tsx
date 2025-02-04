@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { fetchSignup } from "@/api/auth";
+import { fetchSignup } from "@/api/client/auth";
 
 
 export default function SignupForm() {

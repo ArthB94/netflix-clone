@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import ScrollableMovies from "./ScrollableMovies";
-import { getMovies } from "@/api/movies";
+import { getMovies } from "@/api/server/movies";
 import { Movie } from "@/types/movies";
 
 
