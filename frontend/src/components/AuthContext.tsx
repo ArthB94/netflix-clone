@@ -31,6 +31,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
       localStorage.setItem("auth_token", data.token);
       setUser(data);
+      console.log("User logged in: ", data);
     } catch (error) {
       console.error("Erreur de connexion :", error);
       throw error;

@@ -5,7 +5,9 @@ export const fetchLogin = async (email: string, password: string) => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email, password }),
   });
-  return res.json();
+  const data = await res.json();
+  console.log('fetchLogin data: ', data);
+  return data;
 };
 
 export const fetchSignup = async (email: string, username: string, password: string) => {

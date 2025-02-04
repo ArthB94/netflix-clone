@@ -19,11 +19,10 @@ export async function POST(req: NextRequest) {
   const response = NextResponse.json(data);
   response.cookies.set('auth_token', data.token, {
     httpOnly: true,
-    secure: true,
     sameSite: 'strict',
     path: '/',
     maxAge: 60 * 60 * 24, // 1 jour
   });
-
+  console.log('fetchLoginRoute data: ', response);
   return response;
 }

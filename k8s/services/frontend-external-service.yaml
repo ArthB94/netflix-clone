@@ -9,4 +9,4 @@ spec:
     - protocol: TCP
       port: 80    # Le port externe exposé
       targetPort: 3000  # Le port du container à atteindre
-  type: LoadBalancer  # Permet d'exposer le service à l'extérieur du cluster
+  type: NodePort  # Permet d'exposer le service à l'extérieur du cluster
