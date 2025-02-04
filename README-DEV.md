@@ -5,13 +5,13 @@
 ### 1️⃣ Démarrer Minikube  
 
 ```bash
-minikube start -p teleflix-cluster
+minikube start -p netflix-clone
 ```
 
 ### 2️⃣ Activer l'add-on Ingress  
 
 ```bash
-minikube -p teleflix-cluster addons enable ingress
+minikube -p netflix-clone addons enable ingress
 ```
 
 ### 3️⃣ Configurer l'environnement Docker de Minikube  
@@ -19,13 +19,13 @@ minikube -p teleflix-cluster addons enable ingress
 - **macOS** :  
 
   ```bash
-  eval $(minikube -p teleflix-cluster docker-env)
+  eval $(minikube -p netflix-clone docker-env)
   ```  
 
 - **Windows** :  
 
   ```powershell
-  & minikube -p teleflix-cluster docker-env --shell powershell | Invoke-Expression
+  & minikube -p netflix-clone docker-env --shell powershell | Invoke-Expression
   ```  
 
 ### 4️⃣ Construire les images Docker  
@@ -91,8 +91,8 @@ Pour accéder à l'application via `http://teleflix.website` (frontend) et `http
 2. **Activer un tunnel vers le cluster Minikube** :  
 
     ```bash
-    minikube -p teleflix-cluster addons enable ingress-dns
-    minikube -p teleflix-cluster tunnel 
+    minikube -p netflix-clone addons enable ingress-dns
+    minikube -p netflix-clone tunnel 
     ```
 
 3. **Accéder aux services** :  
