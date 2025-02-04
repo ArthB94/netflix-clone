@@ -10,10 +10,13 @@ app.get("/", (req, res) => {
 });
 
 app.get("/movies", (req, res) => {
+  setTimeout(() => {
+    console.log("Waited 2 second before sending response");
+
   res.json([
     {
       id: 1,
-      title: "Movie 1",
+      title: "zgrzgrg 1",
       description: "Description 1",
       year: 2021,
       imageUrl: "https://picsum.photos/300/400",
@@ -100,6 +103,7 @@ app.get("/movies", (req, res) => {
       rating: 5,
     },
   ]);
+}, 5000);
 });
 
 app.get("/movies/:id", (req, res) => {

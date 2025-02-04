@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
   }
 
   // On stocke le token dans un cookie sécurisé
-  const response = NextResponse.json({ success: true });
+  const response = NextResponse.json(data);
   response.cookies.set('auth_token', data.token, {
     httpOnly: true,
     secure: true,

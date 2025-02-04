@@ -4,6 +4,7 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 import { User } from "@/types/auth";
 import { fetchLogin, fetchLogout, fetchMe } from "@/api/auth";
 import Router from "next/navigation";
+
 interface AuthContextType {
   user: User | null;
   login: (email: string, password: string) => Promise<void>;
@@ -26,12 +27,20 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   useEffect(() => {
     const checkUser = async () => {
       try {
-        const data = await fetchMe();
-        if (!data || data.error || !data.username) {
+        const token = localStorage.getItem("auth_token");
+        console.log("Token found:", token);
+        if (!token) {
+          throw new Error("No token found");
+        }
+        const {user} = await fetchMe(token);
+        console.log("User found:", user);
+        if (!user || user.error || !user.username) {
           throw new Error("User not found");
         }
-        setUser(data);
+        setUser(user);
       } catch (error) {
+        console.log("Erreur de connexion :", error);
+        localStorage.removeItem("auth_token");
         setUser(null);
         router.push("/login");
       } finally {
@@ -45,6 +54,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const login = async (email: string, password: string) => {
     try {
       const data = await fetchLogin(email, password);
+      if (!data || data.error) {
+        throw new Error("User not found");
+      }
+      console.log("User logged in:", data);
+      localStorage.setItem("auth_token", data.token);
       setUser(data); // Met à jour l'utilisateur après connexion
     } catch (error) {
       console.error("Erreur de connexion :", error);
@@ -54,8 +68,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const logout = async () => {
     try {
+      localStorage.removeItem("auth_token");
+      setUser(null);
       await fetchLogout();
-      setUser(null); // Supprime l'utilisateur après déconnexion
     } catch (error) {
       console.error("Erreur de déconnexion :", error);
       throw error;
