@@ -3,7 +3,6 @@ import ScrollableMovies from "./ScrollableMovies";
 import { getMovies } from "@/api/server/movies";
 import { Movie } from "@/types/movies";
 
-
 export default async function Home() {
   const MoviesWrapper = async () => {
     const movies = await getMovies();
@@ -31,18 +30,24 @@ export default async function Home() {
       {/* Popular Movies Section */}
       <section className="max-w-7xl">
         <h3 className="text-2xl font-bold mb-4">Popular Movies</h3>
-        <Suspense fallback={
-          <ScrollableMovies movies={Array.from({ length: 10 }).map((_, index) => ({
-            id: index,
-            title: "Loading...",
-            imageUrl: "https://cdn.vectorstock.com/i/1000v/50/20/no-photo-or-blank-image-icon-loading-images-vector-37375020.jpg",
-          } as Movie))} />
-
-        }>
+        <Suspense
+          fallback={
+            <ScrollableMovies
+              movies={Array.from({ length: 10 }).map(
+                (_, index) =>
+                  ({
+                    id: index,
+                    title: "Loading...",
+                    imageurl:
+                      "https://cdn.vectorstock.com/i/1000v/50/20/no-photo-or-blank-image-icon-loading-images-vector-37375020.jpg",
+                  } as Movie)
+              )}
+            />
+          }
+        >
           <MoviesWrapper />
         </Suspense>
       </section>
-
     </main>
   );
 }

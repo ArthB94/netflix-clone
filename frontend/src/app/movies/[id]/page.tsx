@@ -28,7 +28,7 @@ export default async function MovieDetail({
       <div className="flex flex-col sm:flex-row gap-8">
         <div className="w-full sm:w-1/3">
           <Image
-            src={movie.imageUrl || "https://placehold.co/300x400"}
+            src={movie.imageurl || "https://placehold.co/300x400"}
             alt={movie.title}
             className="w-full h-full object-cover rounded"
             width={300}
@@ -39,7 +39,7 @@ export default async function MovieDetail({
           <h1 className="text-4xl font-bold mb-4">{movie.title}</h1>
           <p className="text-lg mb-4">{movie.description}</p>
           <p className="text-sm text-gray-600">Release Date: {movie.year}</p>
-          <p className="text-sm text-gray-600">Rating: {movie.rating}</p>
+          <p className="text-sm text-gray-600">Rating: {movie.globalrating}</p>
         </div>
       </div>
     </main>

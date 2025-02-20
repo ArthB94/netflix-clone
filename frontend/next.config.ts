@@ -13,6 +13,12 @@ const nextConfig: NextConfig = {
         hostname: "cdn.vectorstock.com",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "**",
+        port: "",
+        pathname: "**",
+      },
     ],
   },
 };

@@ -1,4 +1,4 @@
-version: '3.9'
+version: "3.9"
 
 services:
   auth-service:
@@ -61,7 +61,7 @@ services:
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=movies
     volumes:
-      - movies-data:/var/lib/postgresql/data
+      # - movies-data:/var/lib/postgresql/data
       - ./postgres/movies-init.sql:/docker-entrypoint-initdb.d/movies-init.sql
 
 volumes:

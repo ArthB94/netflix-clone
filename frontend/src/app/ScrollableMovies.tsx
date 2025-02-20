@@ -4,7 +4,6 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 export default function ScrollableMovies({ movies }: { movies: Movie[] }) {
-
   const router = useRouter();
 
   const handleMovieClick = (id: number) => {
@@ -12,7 +11,7 @@ export default function ScrollableMovies({ movies }: { movies: Movie[] }) {
   };
 
   return (
-    < div className = "w-full overflow-x-auto" >
+    <div className="w-full overflow-x-auto">
       <div className="grid grid-flow-col auto-cols-[minmax(150px,_1fr)] gap-4 w-max">
         {movies.map((item) => (
           <div
@@ -22,7 +21,7 @@ export default function ScrollableMovies({ movies }: { movies: Movie[] }) {
           >
             <div className="bg-gray-300 w-44 h-60 rounded overflow-hidden">
               <Image
-                src={item.imageUrl || "https://piscum.photos/300/400"}
+                src={item.imageurl || "https://piscum.photos/300/400"}
                 alt={item.title}
                 width={300}
                 height={400}
@@ -35,6 +34,6 @@ export default function ScrollableMovies({ movies }: { movies: Movie[] }) {
           </div>
         ))}
       </div>
-    </div >
-  )
+    </div>
+  );
 }
