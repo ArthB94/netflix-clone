@@ -1,6 +1,6 @@
 # Netflix Clone - Kubernetes Deployment Guide  
 
-## 🚀 Fast Test  
+## 🚀 Fast Start  
 
 ### 1️⃣ Démarrer Minikube  
 
@@ -103,14 +103,67 @@ Pour accéder à l'application via `http://teleflix.website` (frontend) et `http
 
 ## 🔄 Mise à jour d'un déploiement  
 
-### 1️⃣ Rebuild des images  
+### Mettre à jour les images  
+
+#### 1️⃣ Rebuild des images  
 
 ```bash
 docker compose build
 ```
 
-### 2️⃣ Redémarrer le déploiement  
+#### 2️⃣ Redémarrer le déploiement  
 
 ```bash
 kubectl rollout restart deployment
+```
+
+### Mettre à jour les bases de données (exemple pour la base de données `movies-db`)
+#### 1️⃣ Renouveler les ConfigMaps  
+
+```bash
+kubectl delete configmap movies-sql-config
+kubectl create configmap movies-sql-config --from-file=postgres/movies-init.sql
+```
+
+#### 2️⃣ Supprimer le pod de la base de données  
+
+```bash
+kubectl delete -f k8s/deployments/movies-db-deployment.yaml
+```
+
+#### 3️⃣ Supprimer le Persistent Volume Claim de la base de données  
+```bash
+kubectl delete pvc movies-data-movies-db-0
+```
+
+#### 4️⃣ Redémarrer le déploiement de la base de données
+```bash
+kubectl apply -f k8s/deployments/movies-db-deployment.yaml
+```
+---
+
+## 🧪 Commandes de Test
+
+### Récuperer les pods
+
+```bash
+kubectl get pods
+```
+
+### Afficher les logs d'un pod
+
+```bash
+kubectl logs <pod_name>
+```
+
+### Décrire un pod
+
+```bash
+kubectl describe pod <pod_name>
+```
+
+### Executer des commandes sur un pod
+
+```bash
+kubectl exec -it <pod_name> -- /bin/bash
 ```
