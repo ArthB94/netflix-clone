@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: movies-db
+  namespace: production
 spec:
   serviceName: movies-db-service
   replicas: 1
@@ -14,18 +15,18 @@ spec:
         app: movies-db
     spec:
       containers:
-      - name: movies-db
-        image: postgres:17
-        ports:
-        - containerPort: 5432
-        envFrom:
-        - configMapRef:
-            name: movies-config
-        volumeMounts:
-        - name: movies-data
-          mountPath: /var/lib/postgresql/data
-        - name: movies-init
-          mountPath: /docker-entrypoint-initdb.d
+        - name: movies-db
+          image: postgres:17
+          ports:
+            - containerPort: 5432
+          envFrom:
+            - configMapRef:
+                name: movies-config
+          volumeMounts:
+            - name: movies-data
+              mountPath: /var/lib/postgresql/data
+            - name: movies-init
+              mountPath: /docker-entrypoint-initdb.d
       volumes:
         - name: movies-init
           configMap:

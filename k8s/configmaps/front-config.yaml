@@ -3,6 +3,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: frontend-config
+  namespace: production
 data:
   API_AUTH_URL: "http://auth-service:5000"
   API_MOVIES_URL: "http://movies-service:5000"

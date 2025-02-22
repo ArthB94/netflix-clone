@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: auth-db
+  namespace: production
 spec:
   serviceName: "auth-db-service"
   replicas: 1

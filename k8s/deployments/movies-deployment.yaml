@@ -1,7 +1,8 @@
-apiVersion: apps/v1 
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: movies-service
+  namespace: production
 spec:
   replicas: 1
   selector:
@@ -13,12 +14,11 @@ spec:
         app: movies-service
     spec:
       containers:
-      - name: movies-service
-        image: movies-service
-        imagePullPolicy: Never
-        ports:
-        - containerPort: 5000
-        envFrom:
-        - configMapRef:
-            name: movies-config
-
+        - name: movies-service
+          image: movies-service
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 5000
+          envFrom:
+            - configMapRef:
+                name: movies-config
