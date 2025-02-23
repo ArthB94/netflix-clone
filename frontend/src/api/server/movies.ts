@@ -4,10 +4,11 @@ import apiFetch from "./";
 import { Movie } from "@/types/movies";
 const endpoint = "/movies";
 
-const host = process.env.API_MOVIES_URL;
+const host = process.env.API_MOVIES_URL || "http://teleflix.api";
 
 export const getMovies = async (): Promise<Movie[]> => {
-  const res = await apiFetch(host!, `${endpoint}`);
+  console.log("Host from getMovies:", host);
+  const res = await apiFetch(host, `${endpoint}`);
   if (!res) {
     throw new Error("Failed to fetch movies");
   }
@@ -18,7 +19,7 @@ export const getMovies = async (): Promise<Movie[]> => {
 
 export const getMovie = async (id: number): Promise<Movie> => {
   id = parseInt(id.toString());
-  const res = await apiFetch(host!, `${endpoint}/${id}`);
+  const res = await apiFetch(host, `${endpoint}/${id}`);
   if (!res) {
     throw new Error(`Failed to fetch movie with id: ${id}`);
   }

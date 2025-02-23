@@ -11,4 +11,4 @@ COPY . .
 RUN npm run build
 
 EXPOSE 3000
-CMD ["npm", "start"]
+CMD ["NODE_TLS_REJECT_UNAUTHORIZED=0", "npm", "start"]
