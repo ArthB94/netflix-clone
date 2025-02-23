@@ -62,19 +62,25 @@ kubectl -n production create configmap movies-sql-config --from-file=postgres/mo
 kubectl -n production create configmap auth-sql-config --from-file=postgres/auth-init.sql
 ```
 
-### 9. Déployer les applications
+### 9. Ajout des secrets
+
+```bash
+kubectl apply -f k8s/secrets/tls.yaml
+```
+
+### 10. Déployer les applications
 
 ```bash
 kubectl apply -f k8s/deployments
 ```
 
-### 10. Appliquer les services
+### 11. Appliquer les services
 
 ```bash
 kubectl apply -f k8s/services
 ```
 
-### 11. Vérifier les déploiements
+### 12. Vérifier les déploiements
 
 ```bash
 kubectl -n production get pods
@@ -82,7 +88,7 @@ kubectl -n production get pods
 
 Tous les pods doivent être en **Running** dans la colonne `STATUS`.
 
-### 12. Appliquer Ingress
+### 13. Appliquer Ingress
 
 ```bash
 kubectl apply -f k8s/ingress
@@ -118,7 +124,27 @@ Pour accéder à l'application via `http://teleflix.website` (frontend) et `http
 
 ---
 
-## 🔐 Test des autorisations avec RBAC
+## 🔐 Sécurité
+
+### Certificat TLS
+
+Les paramètres du certificat sont enregistrés dans le fichier /cert.conf.
+
+Le certificat est ensuite généré grâce à la commande
+
+```bash
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+  -keyout tls.key -out tls.crt -config cert.conf
+```
+
+Les fichiers sont ensuite convertis en base64 pour être ajoutés au fichier de secrets :
+
+```bash
+base64 -w 0 -i tls.crt
+base64 -w 0 -i tls.key
+```
+
+### Test des autorisations avec RBAC
 
 Pour vérifier que les autorisations fonctionnent, nous pouvons respectivement utiliser les paramètres `--as` et `--as-group` pour effectuer une action avec les droits d'un utilisateur spécifique et d'un group spécifique.
 
