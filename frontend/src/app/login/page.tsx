@@ -1,9 +1,8 @@
 import LoginForm from "@/app/login/LoginForm";
 
 export default function Login() {
-
   return (
-    <main className="flex flex-col gap-8 items-center w-full p-4 sm:p-8">
+    <main className="flex flex-col gap-8 items-center w-full">
       {/* Hero Section */}
       <div
         className="w-full bg-cover bg-center h-80 sm:h-96 text-white flex flex-col justify-end p-8"

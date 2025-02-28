@@ -5,6 +5,8 @@ import { app_name } from "@/config";
 import "./globals.css";
 import { AuthProvider } from "../components/AuthContext";
 import Nav from "./Nav";
+import Image from "next/image";
+import Link from "next/link";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,18 +31,28 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-stone-800 text-white`}
       >
         <AuthProvider>
-          <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+          {/* <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]"> */}
+          <header className="fixed w-full flex justify-between items-center py-4 px-8 text-white z-50">
+            <div className="absolute top-0 left-0 w-full bg-gradient-to-b from-black/70 h-20 -z-10"></div>
+            <Link href="/">
+              <Image
+                src="/teleflix_logo_color.svg"
+                alt="Teleflix logo"
+                width={793}
+                height={292}
+                className="w-auto h-10"
+              />
+            </Link>
+            <Nav />
+          </header>
+          <div className="items-center justify-items-center gap-16 font-[family-name:var(--font-geist-sans)]">
             {/* Header */}
-            <header className="w-full flex justify-between items-center py-4 px-8 text-white">
-              <h1 className="text-3xl font-bold">{app_name}</h1>
-              <Nav />
-            </header>
             {children}
             {/* Footer */}
-            <footer className="w-full text-center text-sm text-gray-500 py-4">
+            <footer className="w-full text-center text-sm text-white opacity-75 py-4 mix-blend-difference">
               <p>&copy; 2024 {app_name}. All rights reserved.</p>
             </footer>
           </div>

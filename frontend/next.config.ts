@@ -21,9 +21,6 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  env: {
-    API_MOVIES_URL: process.env.API_MOVIES_URL,
-  },
 };
 
 export default nextConfig;

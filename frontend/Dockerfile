@@ -10,5 +10,7 @@ COPY . .
 
 RUN npm run build
 
+ENV NODE_TLS_REJECT_UNAUTHORIZED=0
+
 EXPOSE 3000
-CMD ["NODE_TLS_REJECT_UNAUTHORIZED=0", "npm", "start"]
+CMD ["npm", "start"]
