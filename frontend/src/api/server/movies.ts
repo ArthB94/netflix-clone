@@ -7,12 +7,12 @@ const endpoint = "/movies";
 const host = process.env.API_MOVIES_URL;
 
 export const getMovies = async (): Promise<Movie[]> => {
+  console.log("Host from getMovies:", host);
   const res = await apiFetch(host!, `${endpoint}`);
   if (!res) {
     throw new Error("Failed to fetch movies");
   }
   const movies: Movie[] = await res;
-  //console.log("Movies:", movies);
   return movies;
 };
 

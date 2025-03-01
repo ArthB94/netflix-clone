@@ -1,1 +1,1 @@
-export const app_name="Teflix"
+export const app_name = "Teleflix";

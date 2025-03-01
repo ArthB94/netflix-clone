@@ -6,14 +6,15 @@ import { getMe } from "@/api/server/auth";
 export default async function AuthLinks() {
   const UserLinks = async () => {
     const user = await getMe();
-    return user ?
+    return user ? (
       <>
         <ActiveLink href="/my-list">My List</ActiveLink>
         <ActiveLink href="/me">User Info</ActiveLink>
       </>
-      :
+    ) : (
       <ActiveLink href="/login">Login</ActiveLink>
-  }
+    );
+  };
 
   return (
     <nav className="flex gap-4">

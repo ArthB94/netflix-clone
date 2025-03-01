@@ -8,7 +8,7 @@ type ApiFetchOptions = {
 };
 
 export const getToken = async () => {
-  const token = (await cookies()).get('auth_token')?.value;
+  const token = (await cookies()).get("auth_token")?.value;
   return token || null;
 };
 
@@ -19,6 +19,7 @@ const apiFetch = async (
   tokenNeeded: boolean = false
 ) => {
   const token = await getToken();
+  console.log("Host from apiFetch:", host);
   if (!host) {
     console.error("API host is not defined");
     return null;
@@ -27,11 +28,11 @@ const apiFetch = async (
   if (tokenNeeded && !token) {
     console.log("Token is not defined");
     return null;
-  };
+  }
 
   const headers: Record<string, string> = {
     "Content-Type": "application/json",
-    ...(token && { 'Authorization': `Bearer ${token}` }),
+    ...(token && { Authorization: `Bearer ${token}` }),
   };
   console.log("Headers:", headers);
 
