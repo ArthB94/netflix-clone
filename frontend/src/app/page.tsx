@@ -14,22 +14,8 @@ export default async function Home() {
   };
 
   return (
-    <main className="pb-20">
-      {/* Hero Section */}
+    <main className="pb-20 w-full">
       <Suspense fallback={<p>Loading...</p>}>
-        {/* <div
-          className="w-full bg-cover bg-center h-80 sm:h-96 text-white flex flex-col justify-end p-8"
-          style={{ backgroundImage: "url('https://picsum.photos/1920/1080')" }}
-        >
-          <h2 className="text-4xl font-bold mb-2">Welcome to Teleflix</h2>
-          <p className="text-lg">
-            Watch your favorite movies and series anytime, anywhere.
-          </p>
-          <button className="mt-4 px-6 py-2 bg-red-600 hover:bg-red-700 rounded text-white font-semibold">
-            Start Watching
-          </button>
-        </div> */}
-
         {/* First movie */}
         <Suspense fallback={<p>Loading...</p>}>
           <MovieHero movie={firstMovie} />

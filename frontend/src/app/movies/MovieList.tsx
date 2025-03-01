@@ -20,12 +20,13 @@ export default function MovieList({ movies }: { movies: Movie[] }) {
         >
           <div
             key={item.id}
-            className="bg-gray-300 h-40 sm:h-60 rounded overflow-hidden"
+            className="bg-gray-300 aspect-[27/40] rounded overflow-hidden"
+            // className="bg-gray-300 h-40 sm:h-60 rounded overflow-hidden"
           >
             <Image
               src={item.imageurl || "https://picsum.photos/300/400"}
               alt={item.title}
-              width={300}
+              width={270}
               height={400}
               className="w-full h-full object-cover"
             />

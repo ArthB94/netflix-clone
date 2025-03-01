@@ -23,8 +23,8 @@ spec:
             - configMapRef:
                 name: movies-config
           volumeMounts:
-            - name: movies-data
-              mountPath: /var/lib/postgresql/data
+            # - name: movies-data
+            #   mountPath: /var/lib/postgresql/data
             - name: movies-init
               mountPath: /docker-entrypoint-initdb.d
       volumes:

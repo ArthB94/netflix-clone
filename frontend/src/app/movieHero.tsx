@@ -13,9 +13,9 @@ function MovieHero({ movie }: { movie: Movie }) {
 
   return (
     <div className="w-full h-[70vh] flex flex-col mb-10">
-      <div className="absolute w-full h-[70vh] -z-10">
+      <div className="absolute w-full h-[70vh] -z-10 left-0">
         <img
-          src={movie.imageurl}
+          src={movie.heroimageurl ?? movie.imageurl}
           alt={movie.title}
           className="relative w-full h-full object-cover"
         />

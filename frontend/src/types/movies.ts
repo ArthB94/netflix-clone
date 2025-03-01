@@ -4,5 +4,6 @@ export type Movie = {
   description: string;
   year: number;
   imageurl: string;
+  heroimageurl: string;
   globalrating: number;
 };
