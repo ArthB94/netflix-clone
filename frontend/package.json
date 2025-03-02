@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "$(export NODE_TLS_REJECT_UNAUTHORIZED=0 && export API_MOVIES_URL=http://teleflix.api && next dev --turbopack)",
+    "dev": "$(export NODE_TLS_REJECT_UNAUTHORIZED=0 && export API_MOVIES_URL=http://teleflix.api && export API_AUTH_URL=http://teleflix.api && next dev --turbopack)",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"

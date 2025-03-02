@@ -10,10 +10,17 @@ CREATE TABLE movies (
   globalRating REAL NOT NULL
 );
 
+CREATE TABLE user_movie_list (
+  userId INTEGER NOT NULL,
+  movieId INTEGER NOT NULL,
+  PRIMARY KEY (userId, movieId),
+  FOREIGN KEY (movieId) REFERENCES movies(id)
+);
+
 -- INSERT DATA
 
 INSERT INTO movies (title, description, year, imageUrl, heroImageUrl, globalRating) VALUES
-('The Shawshank Redemption', 'Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.', 1994, 'https://dlby.tmsimg.com/assets/p15987_p_v8_ai.jpg?w=480&h=720', 'https://cdn.theasc.com/Shawshank-Featured.jpg', 9.4);
+('The Shawshank Redemption', 'Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.', 1994, 'https://dlby.tmsimg.com/assets/p15987_p_v8_ai.jpg?w=480&h=720', 'https://cdn.theasc.com/Shawshank-Featured.jpg', 9.5);
 
 INSERT INTO movies (title, description, year, imageUrl, globalRating) VALUES
 ('The Godfather', 'The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.', 1972, 'https://m.media-amazon.com/images/M/MV5BNGEwYjgwOGQtYjg5ZS00Njc1LTk2ZGEtM2QwZWQ2NjdhZTE5XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg', 9.2),

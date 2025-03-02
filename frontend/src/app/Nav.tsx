@@ -20,7 +20,6 @@ export default async function AuthLinks() {
     <nav className="flex gap-4">
       <ActiveLink href="/">Home</ActiveLink>
       <ActiveLink href="/movies">Movies</ActiveLink>
-      <ActiveLink href="/series">Series</ActiveLink>
       {/* Afficher Login uniquement si l'utilisateur n'est pas connecté */}
       <Suspense fallback={<p>Loading...</p>}>
         <UserLinks />

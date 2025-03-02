@@ -1,12 +1,12 @@
 import UserInfo from "@/app/me/UserInfo";
-import {getMe} from "@/api/server/auth";
+import { getMe } from "@/api/server/auth";
 import { Suspense } from "react";
 
 export default async function MePage() {
   const UserInfoWrapper = async () => {
     const user = await getMe();
-    return <UserInfo user={user} />
-  }
+    return <UserInfo user={user} />;
+  };
 
   return (
     <main className="flex flex-col gap-8 items-center w-full p-4 sm:p-8">
@@ -25,8 +25,6 @@ export default async function MePage() {
       <Suspense fallback={<p>Loading...</p>}>
         <UserInfoWrapper />
       </Suspense>
-
-
     </main>
   );
 }
